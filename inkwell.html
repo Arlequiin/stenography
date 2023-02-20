@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Inkwell</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {font-family: "Lato", sans-serif}
+.mySlides {display: none}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-black w3-card">
+    <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">Accueil</a>
+    <a href="#band" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Infos</a>
+    <a href="#tour" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Livres</a>
+    <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Contact</a>
+    <div class="w3-dropdown-hover w3-hide-small">
+      <button class="w3-padding-large w3-button" title="More">Plus <i class="fa fa-caret-down"></i></button>     
+      <div class="w3-dropdown-content w3-bar-block w3-card-4">
+        <a href="#" class="w3-bar-item w3-button">Acheter</a>
+        <a href="#" class="w3-bar-item w3-button">Vendre</a>
+        <a href="#" class="w3-bar-item w3-button">Images</a>
+      </div>
+    </div>
+    <a href="javascript:void(0)" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i class="fa fa-search"></i></a>
+  </div>
+</div>
+
+<!-- Navbar on small screens (remove the onclick attribute if you want the navbar to always show on top of the content when clicking on the links) -->
+<div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
+  <a href="#band" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Infos</a>
+  <a href="#tour" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Livres</a>
+  <a href="#contact" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Contact</a>
+  <a href="#" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Achat</a>
+</div>
+
+<!-- Page content -->
+<div class="w3-content" style="max-width:2000px;margin-top:46px">
+
+    <img src="https://media.discordapp.net/attachments/1077182888287674488/1077243717045461103/image.png?width=1838&height=1034" style="width:100%">
+
+
+  <!-- The Band Section -->
+  <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
+    <h2 class="w3-wide">Qu'est-ce que c'est?</h2>
+    <p class="w3-opacity"><i>La passion d'écrire</i></p>
+    <p class="w3-justify">Inkwell est une plateforme en ligne où les écrivains peuvent publier leurs histoires et les lecteurs peuvent les lire gratuitement. Les utilisateurs peuvent parcourir une variété de genres, y compris la romance, le mystère, la science-fiction et bien plus encore. Les histoires peuvent être commentées et partagées, ce qui permet aux écrivains d'obtenir des commentaires sur leur travail et de se connecter avec les lecteurs. Inkwell est une communauté dynamique et active qui met en avant la créativité et l'expression personnelle.</p>
+    <div class="w3-row w3-padding-32">
+      <div class="w3-third">
+        <p>"Une journée de pêche",<br> PlumeVive33</p>
+        <img src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/time-to-fish-bill-dunkley.jpg" class="w3-round w3-margin-bottom" alt="Random Name" style="width:60%">
+      </div>
+      <div class="w3-third">
+        <p>"Un rivière paisible",<br> DouceurFleurie44</p>
+        <img src="https://i.pinimg.com/originals/14/71/f0/1471f0b81b33657884a7840d2e77cae5.jpg" class="w3-round w3-margin-bottom" alt="Random Name" style="width:60%">
+      </div>
+      <div class="w3-third">
+        <p>"Blâfardes saisons",<br> CielÉclatant11</p>
+        <img src="http://images.squarespace-cdn.com/content/v1/55c8d337e4b0e661da87e461/1643053405828-XHCZYRCPUU75RE2LAKG8/snowyday.jpg" class="w3-round" alt="Random Name" style="width:60%">
+      </div>
+    </div>
+  </div>
+
+  <!-- The Tour Section -->
+  <div class="w3-black" id="tour">
+    <div class="w3-container w3-content w3-padding-64" style="max-width:800px">
+      <h2 class="w3-wide w3-center">LIRE DES ŒUVRES</h2>
+      <p class="w3-opacity w3-center"><i>100% gratuit!</i></p><br>
+
+      <ul class="w3-ul w3-border w3-white w3-text-grey">
+        <li class="w3-padding">Une journée de pêche <span class="w3-tag w3-red w3-margin-left">Choix des Lecteurs</span></li>
+        <li class="w3-padding">Une rivière paisible <span class="w3-badge w3-right w3-margin-right">16+</span></li>
+        <li class="w3-padding">Blâfardes saisons <span class="w3-badge w3-right w3-margin-right">12+</span></li>
+      </ul>
+
+      <div class="w3-row-padding w3-padding-32" style="margin:0 -16px">
+        <div class="w3-third w3-margin-bottom">
+          <img src="https://www.etsy.com/img/20882772/r/il/fafe86/3658645169/il_570xN.3658645169_s9pe.jpg" alt="New York" style="width:100%" class="w3-hover-opacity">
+          <div class="w3-container w3-white">
+            <p><b>Une journée de pêche</b></p>
+            <p class="w3-opacity">10 949 👁️</p>
+            <p>"Tu te rappelles de cette journée ? Où nous sommes partis à la pêche avec ce vieil homme."</p>
+            <button class="w3-button w3-black w3-margin-bottom" onclick="document.getElementById('ticketModal').style.display='block'">Lire ></button>
+          </div>
+        </div>
+        <div class="w3-third w3-margin-bottom">
+          <img src="https://live.staticflickr.com/5546/30015812914_287a5a9d1d_b.jpg" alt="Paris" style="width:100%" class="w3-hover-opacity">
+          <div class="w3-container w3-white">
+            <p><b>Une rivière paisible</b></p>
+            <p class="w3-opacity">5740 👁️</p>
+            <p>"La rivière s'écoulait doucement, comme si elle voulait caresser les rochers sur son passage."
+
+            </p>
+            <button class="w3-button w3-black w3-margin-bottom" onclick="document.getElementById('ticketModal').style.display='block'">Lire ></button>
+          </div>
+        </div>
+        <div class="w3-third w3-margin-bottom">
+          <img src="https://i.ebayimg.com/images/g/5dcAAOxyLm9TAe5E/s-l500.jpg" alt="San Francisco" style="width:100%" class="w3-hover-opacity">
+          <div class="w3-container w3-white">
+            <p><b>Blâfardes saisons</b></p>
+            <p class="w3-opacity">2698 👁️</p>
+            <p>"Ô blafardes saisons, reines de nos climats"</p>
+            <button class="w3-button w3-black w3-margin-bottom" onclick="document.getElementById('ticketModal').style.display='block'">Lire ></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ticket Modal -->
+  <div id="ticketModal" class="w3-modal">
+    <div class="w3-modal-content w3-animate-top w3-card-4">
+      <header class="w3-container w3-teal w3-center w3-padding-32"> 
+        <span onclick="document.getElementById('ticketModal').style.display='none'" 
+       class="w3-button w3-teal w3-xlarge w3-display-topright">×</span>
+        <h2 class="w3-wide"><i class="fa fa-book w3-margin-right"></i>Mode lecture</h2>
+      </header>
+      <div class="w3-container">
+
+        <button class="w3-button w3-red w3-section" onclick="document.getElementById('ticketModal').style.display='none'">Fermer <i class="fa fa-remove"></i></button>
+      </div>
+    </div>
+  </div>
+  
+<!-- End Page Content -->
+</div>
+
+<!-- Image of location/map -->
+
+<!-- Footer -->
+
+
+</body>
+</html>
