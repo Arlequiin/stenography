@@ -1,6 +1,5 @@
-array = "abcdefghijklmnopqrstuvwxyz•&-–—@#!%^*()=+ 1234567890éèëēėùçïîà,.:'"
-
-
+array = "abcdefghijklmnopqrstuvwxyz•&-–—@#!%^*()=+ 1234567890éèëēėùçïîà,.:'ß"
+print(len(array))
 def to_list_of_indexes(charset):
    charset=charset.lower()
    list_of_indexes=[]
@@ -35,7 +34,18 @@ width,height=img.size
 l=[]
 for y in range(height):
     for x in range(width):
-        print([pixels[x,y],pixels_ref[x,y]],[(pixels[x,y][i]-pixels_ref[x,y][i]) for i in range(3)])
-        l.append(sum([(pixels[x,y][i]-pixels_ref[x,y][i]) for i in range(3)]))
-#print(l)
+        l.append(sum([(pixels[x,y][i]-pixels_ref[x,y][i]) for i in range(3)])//3*3)
+
+        
+l3=[i for i in range(256) if i%3==0]
+l_decoded=[]
+for i in range(len(l)):
+   l_decoded.append(l3.index(l[i])-1)
+l_cesar=''
+for i in range(len(l_decoded)):
+  try: 
+   l_cesar+=(array[l_decoded[i]])
+  except:
+     break
+print(decode(l_cesar))
 print("Done")

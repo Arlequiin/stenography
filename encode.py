@@ -1,6 +1,5 @@
 array = "abcdefghijklmnopqrstuvwxyz•&-–—@#!%^*()=+ 1234567890éèëēėùçïîà,.:'"
 
-
 def to_list_of_indexes(charset):
    charset=charset.lower()
    list_of_indexes=[]
@@ -29,26 +28,13 @@ def decode(charset,cesar_degree=-3):
 
 
 text = """
-Bonjour, Opération 451 :
-• Rencontre demain 8h devant le portail
-• Apportez des explosifs
-• De l'essence
-• Gants
-• Cagoule
-L'explosion aura lieu à 8h15, nous laissant donc 5 min pour nous échapper après les 10 min d'installation.
-L'explosion sera déclenchée dès lors que la corde sera consumée par le feu. Il faudra préparer une corde de 10 m au moins et de 3 cm d'épaisseur dans l'objectif d'avoir au moins 5 min pour nous échapper.
-Ensuite nous nous empresserons de prendre un train en direction de Tanger, bien-entendu ticket non-nominatif afin de ne laisser aucune traçabilité, annulant ainsi toute possible suspicion, nous payerons l'hotel avec trois jours d'avance pour faire croire que nous y sommes depuis le début de la semaine.
-En comptant sur votre sérieux, votre rigueur et votre fidélité
-— Membre 001
-Projet NSI 2
+Hello world
 """
 text_encoded = encode(text)
+print(text_encoded)
 array+="ß"
 text_encoded=to_list_of_indexes(text_encoded)
-l=[]
-for i in range(256):
-    if i%3==0:
-        l.append(i)
+l=[i for i in range(256) if i%3==0]
 d = {}
 for i in range(len(l)):  #creation of a dict \mathbb{N} -> 3n ; there is 86 solution of n%3=0 in [0;255], so enough to fit all the 61 indexes
    d[i]=l[i]
