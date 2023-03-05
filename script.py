@@ -1,33 +1,66 @@
-array = "abcdefghijklmnopqrstuvwxyz•&-–—@#!%^*()=+ 1234567890éèëēėùçïî"
+from util import *
+################################################################################################################
+text = """Hello world"""
+################################################################################################################
+def encode_text(text,pic1):
+   array = " abcdefghijklmnopqrstuvwxyz•&-–—@#!%^*()=+1234567890éèëēėùçïîà,.:'"
+   text_encoded = encode(text,array)
+   array+="ß"
+   text_encoded=to_list_of_indexes(text_encoded,array)
+   l=[i for i in range(256) if i%3==0]
+   d = {}
+   for i in range(len(l)):  #creation of a dict \mathbb{N} -> 3n ; there is 86 solution of n%3=0 in [0;255], so enough to fit all the 61 indexes
+      d[i]=l[i]
+   for i in range(len(text_encoded)):
+      text_encoded[i]=d[text_encoded[i]]
+   from PIL import Image
+   img=Image.open(pic1)
+   pixels=img.load()
+   width,height=img.size
+   output=Image.new('RGB',(width,height))
+   pixels_out=output.load()
+   #print("Max char = ",width*height)
+   if len(text)>width*height:
+      print("Image is too small to handle all this text, max char allowed :",width*height,"\nHow many you have :",len(text))
+   count=0
+   for y in range(height):
+      for x in range(width):
+         #print(1,pixels[x,y])
+         try:
+            id=text_encoded[count]
+         except:
+            id=0
+         value=pixels[x,y][0]+(id//3)
+         l_temp=list(pixels[x,y])
+         l_temp[0]=value
+         pixels_out[x,y]=tuple(l_temp)
+         #print(2,pixels_out[x,y])
+         count+=1
+   #print(text_encoded)
+   #output.show()
+   output.save(pic1.replace(".png"," copy.png"))
+   return pic1.replace(".png"," copy.png")
 
-def to_list_of_indexes(charset):
-   charset=charset.lower()
-   list_of_indexes=[]
-   for char in charset:
-      if char in array:
-       list_of_indexes.append(array.index(char))
-      else:
-         list_of_indexes.append(char)
-   return list_of_indexes
-def encode(charset,cesar_degree=3):
-   indexes=to_list_of_indexes(charset)
-   output=[]
-   for index in indexes:
-    if type(index)==int:
-      diff=index+cesar_degree
-      if diff>len(array)-1:
-         diff=0+(diff-(len(array)))
-      output.append(array[diff])
-    else:
-      output.append(index)
-   output=''.join(output).capitalize()
-   return output
-def decode(charset,cesar_degree=-3):
-   return encode(charset,cesar_degree)
-
+def decode_text(pic1):
+   array = " abcdefghijklmnopqrstuvwxyz•&-–—@#!%^*()=+1234567890éèëēėùçïîà,.:'ß"
+   l=[i for i in range(256) if i%3==0]
+   from PIL import Image
+   img=Image.open(pic1)
+   pixels=img.load()
+   width,height=img.size
+   output=Image.open(pic1.replace(".png"," copy.png"))
+   pixels_out=output.load()
+   output_textm3=[]
+   for y in range(height):
+      for x in range(width):
+         if pixels_out[x,y][0]!=pixels[x,y][0]:
+            output_textm3.append(3*(pixels_out[x,y][0]-pixels[x,y][0]))
+   #print(output_textm3)
+   out = (multiple3_to_text(output_textm3,array))
+   return out
 
 text = """
-Bonjour, Opération 451 :
+Bonjour, Opération 451 :\n
 • Rencontre demain 8h devant le portail
 • Apportez des explosifs
 • De l'essence
@@ -40,14 +73,5 @@ En comptant sur votre sérieux, votre rigueur et votre fidélité
 — Membre 001
 Projet NSI 2
 """
-print(decode(encode(text)))
-
-from PIL import Image
-img=Image.open("1.jpg")
-pixels=img.load()
-x,y=img.size
-output=Image.new('RGB',(x,y))
-pixels_out=output.load()
-
-output.save("1 copy.jpg")
-print("Done")
+#print(encode_text(text,"static/3.png"))
+#print(decode_text("static/3.png"))
