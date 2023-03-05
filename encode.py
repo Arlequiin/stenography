@@ -1,4 +1,4 @@
-array = "abcdefghijklmnopqrstuvwxyz•&-–—@#!%^*()=+ 1234567890éèëēėùçïîà,.:'"
+array = " abcdefghijklmnopqrstuvwxyz•&-–—@#!%^*()=+1234567890éèëēėùçïîà,.:'"
 
 def to_list_of_indexes(charset):
    charset=charset.lower()
@@ -26,12 +26,15 @@ def encode(charset,cesar_degree=3):
 def decode(charset,cesar_degree=-3):
    return encode(charset,cesar_degree).replace("ß","\n")
 
-
-text = """
-Hello world
-"""
+def multiple3_to_text(liste):
+   l=[i for i in range(256) if i%3==0]
+   for i in range(len(liste)):
+         liste[i]=array[l.index(liste[i])]
+   return decode(''.join(liste))
+################################################################################################################
+text = """Hello world"""
+################################################################################################################
 text_encoded = encode(text)
-print(text_encoded)
 array+="ß"
 text_encoded=to_list_of_indexes(text_encoded)
 l=[i for i in range(256) if i%3==0]
@@ -40,27 +43,30 @@ for i in range(len(l)):  #creation of a dict \mathbb{N} -> 3n ; there is 86 solu
    d[i]=l[i]
 for i in range(len(text_encoded)):
    text_encoded[i]=d[text_encoded[i]]
-print(text_encoded)
 from PIL import Image
-img=Image.open("1.jpg")
+img=Image.open("1.png")
 pixels=img.load()
 width,height=img.size
 output=Image.new('RGB',(width,height))
 pixels_out=output.load()
-matrix=[]
-matrix_indexes=[]
-for y in range(height):
-    matrix.append([])
-    matrix_indexes.append([])
-    for x in range(width):
-        matrix[y].append(pixels[x,y])
-        try:
-          matrix_indexes[y].append(text_encoded[x])
-        except:
-           matrix_indexes[y].append(41)
+print("Max char = ",width*height)
+if len(text)>width*height:
+   print("Image is too small to handle all this text, max char allowed :",width*height,"\nHow many you have :",len(text))
+count=0
 for y in range(height):
    for x in range(width):
-      pixels_out[x,y]=tuple([matrix[y][x][i]+(matrix_indexes[y][x]//3) for i in range(3)])
+      #print(1,pixels[x,y])
+      try:
+         id=text_encoded[count]
+      except:
+         id=0
+      value=pixels[x,y][0]+(id//3)
+      l_temp=list(pixels[x,y])
+      l_temp[0]=value
+      pixels_out[x,y]=tuple(l_temp)
+      #print(2,pixels_out[x,y])
+      count+=1
+print(text_encoded)
 output.show()
-output.save("1 copy.jpg")
+output.save("1 copy.png")
 print("Done")

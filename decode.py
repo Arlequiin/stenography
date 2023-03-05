@@ -1,5 +1,5 @@
-array = "abcdefghijklmnopqrstuvwxyz•&-–—@#!%^*()=+ 1234567890éèëēėùçïîà,.:'ß"
-print(len(array))
+array = " abcdefghijklmnopqrstuvwxyz•&-–—@#!%^*()=+1234567890éèëēėùçïîà,.:'ß"
+
 def to_list_of_indexes(charset):
    charset=charset.lower()
    list_of_indexes=[]
@@ -26,26 +26,24 @@ def encode(charset,cesar_degree=3):
 def decode(charset,cesar_degree=-3):
    return encode(charset,cesar_degree).replace("ß","\n")
 
-
+def multiple3_to_text(liste):
+   l=[i for i in range(256) if i%3==0]
+   for i in range(len(liste)):
+         liste[i]=array[l.index(liste[i])]
+   return decode(''.join(liste))
+l=[i for i in range(256) if i%3==0]
 from PIL import Image
-img,referentiel=Image.open("1 copy.jpg"),Image.open("1.jpg")
-pixels,pixels_ref=img.load(),referentiel.load()
+img=Image.open("1.png")
+pixels=img.load()
 width,height=img.size
-l=[]
+output=Image.open("1 copy.png")
+pixels_out=output.load()
+output_textm3=[]
 for y in range(height):
-    for x in range(width):
-        l.append(sum([(pixels[x,y][i]-pixels_ref[x,y][i]) for i in range(3)])//3*3)
-
-        
-l3=[i for i in range(256) if i%3==0]
-l_decoded=[]
-for i in range(len(l)):
-   l_decoded.append(l3.index(l[i])-1)
-l_cesar=''
-for i in range(len(l_decoded)):
-  try: 
-   l_cesar+=(array[l_decoded[i]])
-  except:
-     break
-print(decode(l_cesar))
-print("Done")
+   for x in range(width):
+      if pixels_out[x,y][0]!=pixels[x,y][0]:
+         output_textm3.append(3*(pixels_out[x,y][0]-pixels[x,y][0]))
+print(output_textm3)
+out = (multiple3_to_text(output_textm3))
+print(out)
+#[33, 24, 45, 45, 54, 9, 78, 54, 63, 45, 21]
