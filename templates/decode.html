@@ -1,176 +1,143 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Decoder</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<style>
-        body {
-            font-family: Freakshow;
-            font-size:150%;
-            background-image: url("matrix.webp");
-        }
-		label {
-			font-weight: bold;
-			display: block;
-			margin-top: 1em;
+	<title>Encoder</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style type="text/css">
+		body {
+			background-color: #000000;
+			color: #00FF00;
+			font-family: monospace;
+			margin: 0;
 		}
 
-		textarea {
-			display: block;
-            font-family: Freakshow;
-			margin-bottom: 1em;
-			width: 90%;
-			resize: vertical;
-			min-height: 8em;
-			padding: 0.5em;
-			border: 1px solid #ccc;
-			border-radius: 4px;
-			font-size: 1em;
-			line-height: 1.5;
+		h1, h2 {
+			text-align: center;
+			color: #00FF00;
+			text-shadow: 1px 1px #000000;
+			margin: 0;
 		}
 
-		select {
-			display: block;
-			margin-top: 1em;
-			font-size: 1em;
-			border: 1px solid #ccc;
-			border-radius: 4px;
-			padding: 0.5em;
+		#container {
+			margin: auto;
+			width: 80%;
+			padding-top: 50px;
+			max-width: 800px;
+		}
+
+		#textarea {
+			width: 100%;
+			height: 200px;
+			padding: 10px;
+			box-sizing: border-box;
+			background-color: #000000;
+			color: #00FF00;
+			border: none;
+			font-family: monospace;
+			font-size: 16px;
+			resize: none;
+			outline: none;
+			text-shadow: 1px 1px #000000;
+			margin-bottom: 20px;
+      animation: typing 0.5s steps(30, end);
+		}
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+		#dropdown {
+			width: 100%;
+			padding: 10px;
+			box-sizing: border-box;
+			background-color: #000000;
+			color: #00FF00;
+			border: none;
+			font-family: monospace;
+			font-size: 16px;
+			outline: none;
+			text-shadow: 1px 1px #000000;
 		}
 
 		option {
-			font-size: 1em;
-			line-height: 1.5;
+			background-color: #000000;
+			color: #00FF00;
+			font-family: monospace;
+			font-size: 16px;
+			text-shadow: 1px 1px #000000;
 		}
 
-                @font-face {
-        font-family: 'Freakshow';
-        src: url('Freakshow.ttf') format('truetype');
-        font-weight: normal;
-        font-style: normal;
-        }
+		#submit {
+			display: block;
+			margin: auto;
+			background-color: #00FF00;
+			color: #000000;
+			border: none;
+			padding: 10px 20px;
+			font-family: monospace;
+			font-size: 16px;
+			cursor: pointer;
+			text-shadow: 1px 1px #000000;
+		}
 
-        /* CSS */
-        .button-82-pushable {
-        position: relative;
-        border: none;
-        background: transparent;
-        padding: 0;
-        cursor: pointer;
-        outline-offset: 4px;
-        transition: filter 250ms;
-        user-select: none;
-        -webkit-user-select: none;
-        touch-action: manipulation;
-        }
+		#submit:hover {
+			background-color: #000000;
+			color: #00FF00;
+			text-shadow: 1px 1px #00FF00;
+		}
 
-        .button-82-shadow {
-        position: absolute;
+		@media only screen and (max-width: 600px) {
+			#container {
+				width: 100%;
+				padding-top: 20px;
+			}
+		}
+
+    #matrix {
+        position: fixed;
         top: 0;
         left: 0;
+        z-index: -1;
         width: 100%;
         height: 100%;
-        border-radius: 12px;
-        background: hsl(0deg 0% 0% / 0.25);
-        will-change: transform;
-        transform: translateY(2px);
-        transition:
-            transform
-            600ms
-            cubic-bezier(.3, .7, .4, 1);
-        }
+        overflow: hidden;
+        background-color: #000000;
+    }
 
-        .button-82-edge {
+    #matrix .stream {
         position: absolute;
         top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border-radius: 12px;
-        background: linear-gradient(
-            to left,
-            hsl(135, 100%, 45%) 0%,
-            hsl(120, 100%, 50%) 8%,
-            hsl(117, 100%, 32%) 92%,
-            hsl(121, 100%, 16%) 100%
-        );
-        }
+        bottom: 0;
+        width: 2px;
+        background-color: #00FF00;
+        animation: stream 10s linear infinite;
+    }
 
-        .button-82-front {
-        display: block;
-        position: relative;
-        padding: 12px 27px;
-        border-radius: 12px;
-        font-size: 1.1rem;
-        color: white;
-        background: hsl(118, 100%, 50%);
-        will-change: transform;
-        transform: translateY(-4px);
-        transition:
-            transform
-            600ms
-            cubic-bezier(.3, .7, .4, 1);
+    @keyframes stream {
+        0% {
+            transform: translateY(-100vh);
         }
-
-        @media (min-width: 768px) {
-        .button-82-front {
-            font-size: 1.25rem;
-            padding: 12px 42px;
+        100% {
+            transform: translateY(100vh);
         }
-        }
-
-        .button-82-pushable:hover {
-        filter: brightness(110%);
-        -webkit-filter: brightness(110%);
-        }
-
-        .button-82-pushable:hover .button-82-front {
-        transform: translateY(-6px);
-        transition:
-            transform
-            250ms
-            cubic-bezier(.3, .7, .4, 1.5);
-        }
-
-        .button-82-pushable:active .button-82-front {
-        transform: translateY(-2px);
-        transition: transform 34ms;
-        }
-
-        .button-82-pushable:hover .button-82-shadow {
-        transform: translateY(4px);
-        transition:
-            transform
-            250ms
-            cubic-bezier(.3, .7, .4, 1.5);
-        }
-
-        .button-82-pushable:active .button-82-shadow {
-        transform: translateY(1px);
-        transition: transform 34ms;
-        }
-
-        .button-82-pushable:focus:not(:focus-visible) {
-        outline: none;
-        }
+    }
 	</style>
 </head>
+<div id="matrix">
+    <div class="stream"></div>
+</div>
 <body>
-	<label for="shakes">Serveur Inkwell</label>
-	<select id="shakes" name="shakes">
-	    <option>Une journée de pêche</option>
-	    <option>Une rivière paisible</option>
-	    <option>Blâfardes saisons</option>
-	</select>
-    <button class="button-82-pushable" role="button">
-        <span class="button-82-shadow"></span>
-        <span class="button-82-edge"></span>
-        <span class="button-82-front text">
-          Valider
-        </span>
-      </button>
-    <p id="output">Le texte s'affichera ici.</p>
+	<div id="container">
+		<h1>Decoder</h1>
+		<h2>Choisissez le serveur</h2>
+		<select id="dropdown">
+			<option value="option1">Une journée de pêche</option>
+			<option value="option2">Une rivière paisible</option>
+			<option value="option3">Blâfardes saisons</option>
+		</select>
+		<button id="submit">Valider</button>
+        <p>Votre texte apparaîtra ici.</p>
+	</div>
 </body>
 </html>
-
