@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Flask Button Example</title>
+</head>
+<body>
+	<button id="my-button">Click me</button>
+
+	<script>
+		// Add a click event listener to the button
+		document.getElementById("my-button").addEventListener("click", function() {
+			// Send a request to the Flask endpoint when the button is clicked
+			fetch('/my-endpoint')
+				.then(response => response.text())
+				.then(data => console.log(data))
+				.catch(error => console.error(error));
+		});
+	</script>
+</body>
+</html>

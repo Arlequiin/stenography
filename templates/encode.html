@@ -102,11 +102,19 @@
 		<textarea id="textarea"></textarea>
 		<h2>Choisissez une option:</h2>
 		<select id="dropdown">
-			<option value="option1">Une journée de pêche</option>
-			<option value="option2">Une rivière paisible</option>
-			<option value="option3">Blâfardes saisons</option>
+			<option value="peche">Une journée de pêche</option>
+			<option value="riviere">Une rivière paisible</option>
+			<option value="hiver">Blâfardes saisons</option>
 		</select>
-		<button id="submit">Valider</button>
+		<button id="submit" onclick="Encodage()">Valider</button>
+    <script>
+function Encodage() {
+    const dropdownValue = document.getElementById("dropdown").value;
+    const textareaValue = document.getElementById("textarea").value;
+    fetch("/encodage/" + dropdownValue + '/' + textareaValue);
+}
+
+    </script>
 	</div>
 </body>
 </html>

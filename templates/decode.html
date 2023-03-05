@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Encoder</title>
+	<title>Decoder</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">
 		body {
@@ -132,12 +132,26 @@
 		<h1>Decoder</h1>
 		<h2>Choisissez le serveur</h2>
 		<select id="dropdown">
-			<option value="option1">Une journée de pêche</option>
-			<option value="option2">Une rivière paisible</option>
-			<option value="option3">Blâfardes saisons</option>
+			<option value="peche">Une journée de pêche</option>
+			<option value="riviere">Une rivière paisible</option>
+			<option value="hiver">Blâfardes saisons</option>
 		</select>
-		<button id="submit">Valider</button>
-        <p>Votre texte apparaîtra ici.</p>
+		<button id="submit" onclick="Decodage()">Valider</button>
+        <p id="final_text">{{ decoded_text }}</p>
+        <script>
+            function Decodage() {
+    const dropdownValue = document.getElementById("dropdown").value;
+    console.log("JS working")
+    fetch("/decodage/" + dropdownValue)
+        .then(response => response.text())
+        .then(decodedText => {
+            console.log(decodedText);
+            document.getElementById("final_text").textContent = decodedText;
+        });
+}
+
+            
+         </script>
 	</div>
 </body>
 </html>
