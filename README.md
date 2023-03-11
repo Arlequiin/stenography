@@ -6,3 +6,12 @@
 $$
 f(x,y,z,a)=(x+\frac{a}{3})(y+\frac{a}{3})(z+\frac{a}{3})
 $$
+
+# Notes
+
+- Deux options : texte dans image ou image dans image 
+deux fonction : Demande a l'utilisateur de choisir une image au format png avec une taille minimum et une phrase a cacher dedans (programme encode)
+
+Fonction inverse pour decode
+
+Deuxieme fonction : dmd a l

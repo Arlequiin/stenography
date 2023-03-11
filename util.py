@@ -10,7 +10,7 @@ def to_list_of_indexes(charset,array):
          list_of_indexes.append(char)
    return list_of_indexes
 def encode(charset,array,cesar_degree=3):
-   charset=charset.replace("\n","ß")
+   charset=charset.replace("\n","@")
    indexes=to_list_of_indexes(charset,array)
    output=[]
    for index in indexes:
@@ -23,8 +23,15 @@ def encode(charset,array,cesar_degree=3):
       output.append(index)
    output=''.join(output).capitalize()
    return output
-def decode(charset,array,cesar_degree=-3):
-   return encode(charset,array,cesar_degree).replace("ß","\n")
+import re
+
+def decode(charset, array, cesar_degree=-3):
+    result = encode(charset, array, cesar_degree)
+    result = result.replace("@", "<br>").replace("!!", "</a>")
+    pattern = r"!(.*?)!"
+    result = re.sub(pattern, r'<a style="color:\1;">', result)
+    return result
+
 
 def multiple3_to_text(liste,array):
    l=[i for i in range(256) if i%3==0]

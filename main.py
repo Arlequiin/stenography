@@ -21,7 +21,7 @@ def test():
 
 @app.route("/encodage/<dropdown_value>/<textarea_value>")
 def my_route(dropdown_value,textarea_value):
-    d = {'peche':'1.png','river':'2.png','hiver':'3.png'}
+    d = {'peche':'1.png','riviere':'2.png','hiver':'3.png'}
     encode_text(textarea_value,'static/'+d[dropdown_value])
     return "Success"
 
@@ -33,5 +33,5 @@ def my_route2(dropdown_value):
     print(decoded)
     return decoded
 
-if __name__ == "__main__":
-    app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True, port=8001)

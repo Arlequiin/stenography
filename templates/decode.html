@@ -146,7 +146,7 @@
         .then(response => response.text())
         .then(decodedText => {
             console.log(decodedText);
-            document.getElementById("final_text").textContent = decodedText;
+            document.getElementById("final_text").innerHTML = decodedText;
         });
 }
 

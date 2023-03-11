@@ -1,11 +1,9 @@
 from util import *
 ################################################################################################################
-text = """Hello world"""
+array = " abcdefghijklmnopqrstuvwxyz•&-–—@#!%^*()=+1234567890éèëēėùçïîà,.:'¶"
 ################################################################################################################
 def encode_text(text,pic1):
-   array = " abcdefghijklmnopqrstuvwxyz•&-–—@#!%^*()=+1234567890éèëēėùçïîà,.:'"
    text_encoded = encode(text,array)
-   array+="ß"
    text_encoded=to_list_of_indexes(text_encoded,array)
    l=[i for i in range(256) if i%3==0]
    d = {}
@@ -42,7 +40,7 @@ def encode_text(text,pic1):
    return pic1.replace(".png"," copy.png")
 
 def decode_text(pic1):
-   array = " abcdefghijklmnopqrstuvwxyz•&-–—@#!%^*()=+1234567890éèëēėùçïîà,.:'ß"
+   array = " abcdefghijklmnopqrstuvwxyz•&-–—@#!%^*()=+1234567890éèëêėùçïîà,.:'¶"
    l=[i for i in range(256) if i%3==0]
    from PIL import Image
    img=Image.open(pic1)

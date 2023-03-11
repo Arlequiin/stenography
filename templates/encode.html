@@ -99,6 +99,7 @@
 	<div id="container">
 		<h1>Encoder</h1>
 		<h2>Saisissez le texte à cacher:</h2>
+		<p>Astuces :<br> '@' pour sauter de ligne<br>'!red&<votre texte>&' pour mettre du texte en <a style="color:red;">rouge</a></p>
 		<textarea id="textarea"></textarea>
 		<h2>Choisissez une option:</h2>
 		<select id="dropdown">
@@ -112,6 +113,8 @@ function Encodage() {
     const dropdownValue = document.getElementById("dropdown").value;
     const textareaValue = document.getElementById("textarea").value;
     fetch("/encodage/" + dropdownValue + '/' + textareaValue);
+	//alert(`Texte stocké dans le serveur choisi avec succès!`)
+	reload()
 }
 
     </script>
