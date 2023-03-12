@@ -98,9 +98,212 @@
 <body>
 	<div id="container">
 		<h1>Encoder</h1>
+    <form>
+			<input type="radio" name="selection" id="text" value="text" onclick="openCity(event, 'Text')" checked>
+			<label for="texte">Texte</label>
+			<input type="radio" name="selection" id="image" value="image" onclick="openCity(event, 'Image')">
+			<label for="image">Image</label>
+		  </form>
+    <div id="Text">
 		<h2>Saisissez le texte à cacher:</h2>
-		<p>Astuces :<br> '@' pour sauter de ligne<br>'!red&<votre texte>&' pour mettre du texte en <a style="color:red;">rouge</a></p>
-		<textarea id="textarea"></textarea>
+		<p>Astuces :<br> '@' pour sauter de ligne<br>
+      '!line!(text)!!' pour <u>souligner</u> le texte<br>
+      '!bold!(text)!!' pour mettre le texte en <b>gras</b><br>
+      '!(couleur)!(texte)!!' pour mettre du texte en <a style="color:red;">couleur</a></p><br>
+    <details>
+      <summary>
+        Couleurs utilisables :
+      </summary>
+      <div style="background:#2e2e2e;overflow-y: scroll; height:400px;">
+        <a style="color:AliceBlue">AliceBlue</a><br>
+<a style="color:AntiqueWhite">AntiqueWhite</a><br>
+<a style="color:Aqua">Aqua</a><br>
+<a style="color:Aquamarine">Aquamarine</a><br>
+<a style="color:Azure">Azure</a><br>
+<a style="color:Beige">Beige</a><br>
+<a style="color:Bisque">Bisque</a><br>
+<a style="color:Black">Black</a><br>
+<a style="color:BlanchedAlmond">BlanchedAlmond</a><br>
+<a style="color:Blue">Blue</a><br>
+<a style="color:BlueViolet">BlueViolet</a><br>
+<a style="color:Brown">Brown</a><br>
+<a style="color:BurlyWood">BurlyWood</a><br>
+<a style="color:CadetBlue">CadetBlue</a><br>
+<a style="color:Chartreuse">Chartreuse</a><br>
+<a style="color:Chocolate">Chocolate</a><br>
+<a style="color:Coral">Coral</a><br>
+<a style="color:CornflowerBlue">CornflowerBlue</a><br>
+<a style="color:Cornsilk">Cornsilk</a><br>
+<a style="color:Crimson">Crimson</a><br>
+<a style="color:Cyan">Cyan</a><br>
+<a style="color:DarkBlue">DarkBlue</a><br>
+<a style="color:DarkCyan">DarkCyan</a><br>
+<a style="color:DarkGoldenRod">DarkGoldenRod</a><br>
+<a style="color:DarkGray">DarkGray</a><br>
+<a style="color:DarkGrey">DarkGrey</a><br>
+<a style="color:DarkGreen;background:black;">DarkGreen</a><br>
+<a style="color:DarkKhaki">DarkKhaki</a><br>
+<a style="color:DarkMagenta;background:black;">DarkMagenta</a><br>
+<a style="color:DarkOliveGreen;background:black;">DarkOliveGreen</a><br>
+<a style="color:DarkOrange">DarkOrange</a><br>
+<a style="color:DarkOrchid">DarkOrchid</a><br>
+<a style="color:DarkRed">DarkRed</a><br>
+<a style="color:DarkSalmon;background:black;">DarkSalmon</a><br>
+<a style="color:DarkSeaGreen;background:black;">DarkSeaGreen</a><br>
+<a style="color:DarkSlateBlue;background:black;">DarkSlateBlue</a><br>
+<a style="color:DarkSlateGray;background:black;">DarkSlateGray</a><br>
+<a style="color:DarkTurquoise">DarkTurquoise</a><br>
+<a style="color:DarkViolet;background:black;">DarkViolet</a><br>
+<a style="color:DeepPink">DeepPink</a><br>
+<a style="color:DeepSkyBlue">DeepSkyBlue</a><br>
+<a style="color:DimGray;background:black;">DimGray</a><br>
+<a style="color:DodgerBlue">DodgerBlue</a><br>
+<a style="color:FireBrick">FireBrick</a><br>
+<a style="color:floralwhite">FloralWhite</a><br>
+<a style="color:ForestGreen">ForestGreen</a><br>
+<a style="color:Fuchsia">Fuchsia</a><br>
+<a style="color:Gainsboro">Gainsboro</a><br>
+<a style="color:GhostWhite">GhostWhite</a><br>
+<a style="color:Gold">Gold</a><br>
+<a style="color:GoldenRod">GoldenRod</a><br>
+<a style="color:Gray">Gray</a><br>
+<a style="color:Grey">Grey</a><br>
+<a style="color:Green">Green</a><br>
+<a style="color:GreenYellow">GreenYellow</a><br>
+<a style="color:HoneyDew">HoneyDew</a><br>
+<a style="color:HotPink">HotPink</a><br>
+<a style="color:IndianRed">IndianRed</a><br>
+<a style="color:Indigo">Indigo</a><br>
+<a style="color:Ivory">Ivory</a><br>
+<a style="color:Khaki">Khaki</a><br>
+<a style="color:Lavender">Lavender</a><br>
+<a style="color:LavenderBlush">LavenderBlush</a><br>
+<a style="color:LawnGreen">LawnGreen</a><br>
+<a style="color:LemonChiffon">LemonChiffon</a><br>
+<a style="color:LightBlue">LightBlue</a><br>
+<a style="color:LightCoral">LightCoral</a><br>
+<a style="color:LightCyan">LightCyan</a><br>
+<a style="color:LightGoldenRodYellow">LightGoldenRodYellow</a><br>
+<a style="color:LightGray">LightGray</a><br>
+<a style="color:LightGrey">LightGrey</a><br>
+<a style="color:LightGreen">LightGreen</a><br>
+<a style="color:LightPink">LightPink</a><br>
+<a style="color:LightSalmon">LightSalmon</a><br>
+<a style="color:LightSeaGreen">LightSeaGreen</a><br>
+<a style="color:LightSkyBlue">LightSkyBlue</a><br>
+<a style="color:LightSlateGray">LightSlateGray</a><br>
+<a style="color:LightSlateGrey">LightSlateGrey</a><br>
+<a style="color:LightSteelBlue">LightSteelBlue</a><br>
+<a style="color:LightYellow">LightYellow</a><br>
+<a style="color:Lime">Lime</a><br>
+<a style="color:LimeGreen">LimeGreen</a><br>
+<a style="color:Linen">Linen</a><br>
+<a style="color:Magenta">Magenta</a><br>
+<a style="color:Maroon">Maroon</a><br>
+<a style="color:MediumAquaMarine">MediumAquaMarine</a><br>
+<a style="color:MediumBlue">MediumBlue</a><br>
+<a style="color:MediumOrchid">MediumOrchid</a><br>
+<a style="color:MediumPurple">MediumPurple</a><br>
+<a style="color:MediumSeaGreen">MediumSeaGreen</a><br>
+<a style="color:MediumSlateBlue">MediumSlateBlue</a><br>
+<a style="color:MediumSpringGreen">MediumSpringGreen</a><br>
+<a style="color:MediumTurquoise">MediumTurquoise</a><br>
+<a style="color:MediumVioletRed">MediumVioletRed</a><br>
+<a style="color:MidnightBlue">MidnightBlue</a><br>
+<a style="color:MintCream">MintCream</a><br>
+<a style="color:MistyRose">MistyRose</a><br>
+<a style="color:Moccasin">Moccasin</a><br>
+<a style="color:NavajoWhite">NavajoWhite</a><br>
+<a style="color:Navy">Navy</a><br>
+<a style="color:OldLace">OldLace</a><br>
+<a style="color:Olive">Olive</a><br>
+<a style="color:OliveDrab">OliveDrab</a><br>
+<a style="color:Orange">Orange</a><br>
+<a style="color:OrangeRed">OrangeRed</a><br>
+<a style="color:Orchid">Orchid</a><br>
+<a style="color:PaleGoldenRod">PaleGoldenRod</a><br>
+<a style="color:PaleGreen">PaleGreen</a><br>
+<a style="color:PaleTurquoise">PaleTurquoise</a><br>
+<a style="color:PaleVioletRed">PaleVioletRed</a><br>
+<a style="color:PapayaWhip">PapayaWhip</a><br>
+<a style="color:PeachPuff">PeachPuff</a><br>
+<a style="color:Peru">Peru</a><br>
+<a style="color:Pink">Pink</a><br>
+<a style="color:Plum">Plum</a><br>
+<a style="color:PowderBlue">PowderBlue</a><br>
+<a style="color:Purple">Purple</a><br>
+<a style="color:Red">Red</a><br>
+<a style="color:RosyBrown">RosyBrown</a><br>
+<a style="color:RoyalBlue">RoyalBlue</a><br>
+<a style="color:SaddleBrown">SaddleBrown</a><br>
+<a style="color:Salmon">Salmon</a><br>
+<a style="color:SandyBrown">SandyBrown</a><br>
+<a style="color:SeaGreen">SeaGreen</a><br>
+<a style="color:SeaShell">SeaShell</a><br>
+<a style="color:Sienna">Sienna</a><br>
+<a style="color:Silver">Silver</a><br>
+<a style="color:SkyBlue">SkyBlue</a><br>
+<a style="color:SlateBlue">SlateBlue</a><br>
+<a style="color:SlateGray">SlateGray</a><br>
+<a style="color:SlateGrey">SlateGrey</a><br>
+<a style="color:Snow">Snow</a><br>
+<a style="color:SpringGreen">SpringGreen</a><br>
+<a style="color:SteelBlue">SteelBlue</a><br>
+<a style="color:Tan">Tan</a><br>
+<a style="color:Teal">Teal</a><br>
+<a style="color:Thistle">Thistle</a><br>
+<a style="color:Tomato">Tomato</a><br>
+<a style="color:Turquoise">Turquoise</a><br>
+<a style="color:Violet">Violet</a><br>
+<a style="color:Wheat">Wheat</a><br>
+<a style="color:White">White</a><br>
+<a style="color:WhiteSmoke">WhiteSmoke</a><br>
+<a style="color:Yellow">Yellow</a><br>
+<a style="color:YellowGreen">YellowGreen</a><br>
+      </div>
+    </details>
+		<textarea id="textarea" placeholder="Saisissez votre texte ici"></textarea>
+      </div><br>
+    <div id="Image" style="display:none">
+      <style>
+  div {
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #0F0;
+    background-color: #000;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  input[type="file"] {
+    margin: 10px 0;
+    background-color: #000;
+    border: 1px solid #0F0;
+    color: #0F0;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  button {
+    background-color: #0F0;
+    color: #000;
+    border: 1px solid #0F0;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  button:hover {
+    background-color: #00FF00;
+  }
+        </style>
+      <img src="https://raw.githubusercontent.com/pret/pokeemerald/master/graphics/items/icons/basement_key.png">
+		<p>Glissez et déposez une image ici ou cliquez pour en choisir une.</p>
+      <p>Taille recommandée : 100*100px</p>
+<input type="file" id="image-upload" name="image">
+<button onclick="saveFile()">Sauvegarder</button>
+	</div><br>
 		<h2>Choisissez une option:</h2>
 		<select id="dropdown">
 			<option value="peche">Une journée de pêche</option>
@@ -117,6 +320,15 @@ function Encodage() {
 	reload()
 }
 
+      function openCity(evt, cityName) {
+      if (cityName=="Text"){
+		document.getElementById("Text").style.display='block';
+		document.getElementById("Image").style.display='none';
+	  } else {
+		document.getElementById("Text").style.display='none';
+		document.getElementById("Image").style.display='block';
+	  }
+    }
     </script>
 	</div>
 </body>

@@ -30,6 +30,10 @@ def decode(charset, array, cesar_degree=-3):
     result = result.replace("@", "<br>").replace("!!", "</a>")
     pattern = r"!(.*?)!"
     result = re.sub(pattern, r'<a style="color:\1;">', result)
+    if "line" in result:
+      result=result.replace("style=\"","style=\"text-decoration: underline;")
+    if "bold" in result:
+      result=result.replace("style=\"","style=\"font-weight: bold;")
     return result
 
 
