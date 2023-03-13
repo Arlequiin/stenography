@@ -29,6 +29,8 @@ def encode_text(text,pic1):
          except:
             id=0
          value=pixels[x,y][0]+(id//3)
+         if value>255:
+           pixels[x,y][0]-(id//3)
          l_temp=list(pixels[x,y])
          l_temp[0]=value
          pixels_out[x,y]=tuple(l_temp)
@@ -52,7 +54,7 @@ def decode_text(pic1):
    for y in range(height):
       for x in range(width):
          if pixels_out[x,y][0]!=pixels[x,y][0]:
-            output_textm3.append(3*(pixels_out[x,y][0]-pixels[x,y][0]))
+            output_textm3.append(3*abs(pixels_out[x,y][0]-pixels[x,y][0]))
    #print(output_textm3)
    out = (multiple3_to_text(output_textm3,array))
    return out
