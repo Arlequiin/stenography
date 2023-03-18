@@ -1,6 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from script import *
-
+from PIL import Image
 app = Flask(__name__)
 
 @app.route("/")
@@ -9,11 +9,11 @@ def home():
     
 @app.route("/decode")
 def decode_page():
-    return render_template("decode.html",decoded_text="Votre texte s'affichera ici.")
+    return render_template("decode.html",decoded_text="Votre texte ou votre image s'affichera ici.")
 
 @app.route("/encode")
 def encode_page():
-    return render_template("encode.html")
+    return render_template("encode.html",matrix='')
 
 @app.route("/test")
 def test():
@@ -32,6 +32,23 @@ def my_route2(dropdown_value):
     decoded=decode_text('static/'+d[dropdown_value])
     print(decoded)
     return decoded
+
+@app.route('/encode_image', methods=['POST'])
+def encode_image():
+    arbre = Image.open(request.files['image'])
+    pixels = arbre.load()
+    width, height = arbre.size
+    matrix = []
+    for y in range(height):
+        matrix.append([])
+        for x in range(width):
+            matrix[y].append(pixels[x,y])
+    matrix=str(matrix)
+    matrix=matrix.replace("(","[")
+    matrix=matrix.replace(")","]")
+    print(matrix)
+    return render_template("encode.html",matrix="[img]"+matrix)
+
 
 if __name__ == '__main__':
     app.run(debug=True,host='0.0.0.0', port=8080)

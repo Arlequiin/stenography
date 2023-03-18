@@ -1,6 +1,6 @@
 from util import *
 ################################################################################################################
-array = " abcdefghijklmnopqrstuvwxyz•&-–—@#!%^*()=+1234567890éèëēėùçïîà,.:'¶"
+array = " abcdefghijklmnopqrstuvwxyz•&-–—@#!%^*[]()=+1234567890éèëēėùçïîà,.:'¶$ê"
 ################################################################################################################
 def encode_text(text,pic1):
    text_encoded = encode(text,array)
@@ -30,7 +30,7 @@ def encode_text(text,pic1):
             id=0
          value=pixels[x,y][0]+(id//3)
          if value>255:
-           pixels[x,y][0]-(id//3)
+           value=pixels[x,y][0]-(id//3)
          l_temp=list(pixels[x,y])
          l_temp[0]=value
          pixels_out[x,y]=tuple(l_temp)
@@ -42,7 +42,7 @@ def encode_text(text,pic1):
    return pic1.replace(".png"," copy.png")
 
 def decode_text(pic1):
-   array = " abcdefghijklmnopqrstuvwxyz•&-–—@#!%^*()=+1234567890éèëêėùçïîà,.:'¶"
+   array = " abcdefghijklmnopqrstuvwxyz•&-–—@#!%^*[]()=+1234567890éèëêėùçïîà,.:'¶$ê"
    l=[i for i in range(256) if i%3==0]
    from PIL import Image
    img=Image.open(pic1)
@@ -54,6 +54,7 @@ def decode_text(pic1):
    for y in range(height):
       for x in range(width):
          if pixels_out[x,y][0]!=pixels[x,y][0]:
+            #print(3*abs(pixels_out[x,y][0]-pixels[x,y][0]))
             output_textm3.append(3*abs(pixels_out[x,y][0]-pixels[x,y][0]))
    #print(output_textm3)
    out = (multiple3_to_text(output_textm3,array))

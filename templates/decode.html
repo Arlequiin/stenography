@@ -67,6 +67,9 @@
 			font-size: 16px;
 			text-shadow: 1px 1px #000000;
 		}
+    canvas {
+  border: 1px solid white;
+}
 
 		#submit {
 			display: block;
@@ -94,42 +97,12 @@
 			}
 		}
 
-    #matrix {
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: -1;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        background-color: #000000;
-    }
-
-    #matrix .stream {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 2px;
-        background-color: #00FF00;
-        animation: stream 10s linear infinite;
-    }
-
-    @keyframes stream {
-        0% {
-            transform: translateY(-100vh);
-        }
-        100% {
-            transform: translateY(100vh);
-        }
-    }
 	</style>
 </head>
-<div id="matrix">
-    <div class="stream"></div>
-</div>
 <body>
 	<div id="container">
 		<h1>Decoder</h1>
+    
 		<h2>Choisissez le serveur</h2>
 		<select id="dropdown">
 			<option value="peche">Une journée de pêche</option>
@@ -138,6 +111,7 @@
 		</select>
 		<button id="submit" onclick="Decodage()">Valider</button>
         <p id="final_text">{{ decoded_text }}</p>
+        <canvas id="canvas" width="400px" height="400px"></canvas>
         <script>
             function Decodage() {
     const dropdownValue = document.getElementById("dropdown").value;
@@ -145,13 +119,49 @@
     fetch("/decodage/" + dropdownValue)
         .then(response => response.text())
         .then(decodedText => {
-            console.log(decodedText);
+            if (decodedText.substring(0, 5) === "[img]"){
+              decodedText=decodedText.substring(5);
+              //console.log(decodedText)
+              decodedText = JSON.parse(decodedText);
+              document.getElementById("final_text").innerHTML = `Dimensions : ${decodedText.length}*${decodedText[0].length}`;
+              const canvas = document.getElementById("canvas");
+              const ctx = canvas.getContext("2d");
+              let pixelSize = 5;
+              for (let i = 0; i < decodedText.length; i++) {
+    for (let j = 0; j < decodedText[0].length; j++) {
+        ctx.fillStyle = `rgb(${decodedText[i][j][0]},${decodedText[i][j][1]},${decodedText[i][j][2]})`;
+        ctx.fillRect(j * pixelSize, i * pixelSize, pixelSize, pixelSize);
+    }
+}
+
+              //alert("C'est une image")
+            } else {
             document.getElementById("final_text").innerHTML = decodedText;
+            }
         });
 }
 
             
          </script>
+      <script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { 
+      preferredFont: "TeX", 
+      availableFonts: ["STIX","TeX"], 
+      styles: {".MathJax": {color: "#CCCCCC"}} 
+      }
+});
+</script>
 	</div>
 </body>
 </html>

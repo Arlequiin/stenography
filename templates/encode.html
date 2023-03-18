@@ -93,6 +93,12 @@
 				padding-top: 20px;
 			}
 		}
+
+    ::selection {
+  background-color: white;
+  color:black;
+}
+
 	</style>
 </head>
 <body>
@@ -109,7 +115,8 @@
 		<p>Astuces :<br> '@' pour sauter de ligne<br>
       '!line!(text)!!' pour <u>souligner</u> le texte<br>
       '!bold!(text)!!' pour mettre le texte en <b>gras</b><br>
-      '!(couleur)!(texte)!!' pour mettre du texte en <a style="color:red;">couleur</a></p><br>
+      '!(couleur)!(texte)!!' pour mettre du texte en <a style="color:red;">couleur</a><br>Si rien ne se passe c'est que votre texte est trop long.<br>Vous pouvez stocker jusqu'à 893 200 caractères dans un seul et même serveur!<br><a style="color:gold;">Passez à la version <u>PREMIUM</u> pour stocker jusqu'à 33 millions de caractères!</a></p>
+  
     <details>
       <summary>
         Couleurs utilisables :
@@ -141,22 +148,22 @@
 <a style="color:DarkGoldenRod">DarkGoldenRod</a><br>
 <a style="color:DarkGray">DarkGray</a><br>
 <a style="color:DarkGrey">DarkGrey</a><br>
-<a style="color:DarkGreen;background:black;">DarkGreen</a><br>
+<a style="color:DarkGreen;">DarkGreen</a><br>
 <a style="color:DarkKhaki">DarkKhaki</a><br>
-<a style="color:DarkMagenta;background:black;">DarkMagenta</a><br>
-<a style="color:DarkOliveGreen;background:black;">DarkOliveGreen</a><br>
+<a style="color:DarkMagenta;">DarkMagenta</a><br>
+<a style="color:DarkOliveGreen;">DarkOliveGreen</a><br>
 <a style="color:DarkOrange">DarkOrange</a><br>
 <a style="color:DarkOrchid">DarkOrchid</a><br>
 <a style="color:DarkRed">DarkRed</a><br>
-<a style="color:DarkSalmon;background:black;">DarkSalmon</a><br>
-<a style="color:DarkSeaGreen;background:black;">DarkSeaGreen</a><br>
-<a style="color:DarkSlateBlue;background:black;">DarkSlateBlue</a><br>
-<a style="color:DarkSlateGray;background:black;">DarkSlateGray</a><br>
+<a style="color:DarkSalmon;">DarkSalmon</a><br>
+<a style="color:DarkSeaGreen;">DarkSeaGreen</a><br>
+<a style="color:DarkSlateBlue;">DarkSlateBlue</a><br>
+<a style="color:DarkSlateGray;">DarkSlateGray</a><br>
 <a style="color:DarkTurquoise">DarkTurquoise</a><br>
-<a style="color:DarkViolet;background:black;">DarkViolet</a><br>
+<a style="color:DarkViolet;">DarkViolet</a><br>
 <a style="color:DeepPink">DeepPink</a><br>
 <a style="color:DeepSkyBlue">DeepSkyBlue</a><br>
-<a style="color:DimGray;background:black;">DimGray</a><br>
+<a style="color:DimGray;">DimGray</a><br>
 <a style="color:DodgerBlue">DodgerBlue</a><br>
 <a style="color:FireBrick">FireBrick</a><br>
 <a style="color:floralwhite">FloralWhite</a><br>
@@ -262,7 +269,7 @@
 <a style="color:YellowGreen">YellowGreen</a><br>
       </div>
     </details>
-		<textarea id="textarea" placeholder="Saisissez votre texte ici"></textarea>
+		<textarea id="textarea" placeholder="Saisissez votre texte ici">{{ matrix }}</textarea>
       </div><br>
     <div id="Image" style="display:none">
       <style>
@@ -299,10 +306,12 @@
   }
         </style>
       <img src="https://raw.githubusercontent.com/pret/pokeemerald/master/graphics/items/icons/basement_key.png">
-		<p>Glissez et déposez une image ici ou cliquez pour en choisir une.</p>
       <p>Taille recommandée : 100*100px</p>
-<input type="file" id="image-upload" name="image">
-<button onclick="saveFile()">Sauvegarder</button>
+<form method="POST" enctype="multipart/form-data" action="{{ url_for('encode_image') }}">
+		<label for="image">Veuillez choisir une image.</label>
+		<input type="file" id="image" name="image">
+    <button id="submit" type="submit">Enregistrer</button>
+	</form>
 	</div><br>
 		<h2>Choisissez une option:</h2>
 		<select id="dropdown">
@@ -317,10 +326,22 @@ function Encodage() {
     const textareaValue = document.getElementById("textarea").value;
     fetch("/encodage/" + dropdownValue + '/' + textareaValue);
 	//alert(`Texte stocké dans le serveur choisi avec succès!`)
-	reload()
 }
 
-      function openCity(evt, cityName) {
+function pic() {
+      const form = document.querySelector('form');
+      const formData = new FormData(form);
+      fetch('/encode_image', {
+        method: 'POST',
+        body: formData,
+      })
+      .then(response => response.text())
+      .then(data => {
+        console.log(data);
+      });
+    }
+
+function openCity(evt, cityName) {
       if (cityName=="Text"){
 		document.getElementById("Text").style.display='block';
 		document.getElementById("Image").style.display='none';
@@ -329,7 +350,8 @@ function Encodage() {
 		document.getElementById("Image").style.display='block';
 	  }
     }
-    </script>
+
+</script>
 	</div>
 </body>
 </html>
