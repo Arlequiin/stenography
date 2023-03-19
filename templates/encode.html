@@ -115,7 +115,7 @@
 		<p>Astuces :<br> '@' pour sauter de ligne<br>
       '!line!(text)!!' pour <u>souligner</u> le texte<br>
       '!bold!(text)!!' pour mettre le texte en <b>gras</b><br>
-      '!(couleur)!(texte)!!' pour mettre du texte en <a style="color:red;">couleur</a><br>Si rien ne se passe c'est que votre texte est trop long.<br>Vous pouvez stocker jusqu'à 893 200 caractères dans un seul et même serveur!<br><a style="color:gold;">Passez à la version <u>PREMIUM</u> pour stocker jusqu'à 33 millions de caractères!</a></p>
+      '!(couleur)!(texte)!!' pour mettre du texte en <a style="color:red;">couleur</a><br>Vous pouvez stocker jusqu'à 893 200 caractères dans un seul et même serveur!<br><a style="color:gold;">Passez à la version <u>PREMIUM</u> pour stocker jusqu'à 33 millions de caractères!</a></p>
   
     <details>
       <summary>
@@ -313,17 +313,29 @@
     <button id="submit" type="submit">Enregistrer</button>
 	</form>
 	</div><br>
-		<h2>Choisissez une option:</h2>
+		<h2>Choisissez un serveur:</h2>
 		<select id="dropdown">
 			<option value="peche">Une journée de pêche</option>
 			<option value="riviere">Une rivière paisible</option>
 			<option value="hiver">Blâfardes saisons</option>
+      <option value="pro1">👑 Tableau à l'affiche</option>
 		</select>
 		<button id="submit" onclick="Encodage()">Valider</button>
     <script>
 function Encodage() {
     const dropdownValue = document.getElementById("dropdown").value;
     const textareaValue = document.getElementById("textarea").value;
+    if (dropdownValue == "pro1"){
+      const pws = ["premacc","password","premium"];
+      let pw = prompt("Le serveur choisi est réservé aux comptes premiums. Veuillez saisir votre mot de passe.");
+      if (pws.includes(pw)) {
+        alert("Connexion réussie.");
+      } else {
+        alert("Mot de passe incorrect. Veuillez choisir un serveur gratuit ou souscrire à un abonnement.");
+        window.location.reload();
+      }
+      
+    }
     fetch("/encodage/" + dropdownValue + '/' + textareaValue);
 	//alert(`Texte stocké dans le serveur choisi avec succès!`)
 }
