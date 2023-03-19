@@ -19,8 +19,11 @@ def encode_page():
 def test():
     return render_template("test.html")
 
-@app.route("/encodage/<dropdown_value>/<textarea_value>")
-def my_route(dropdown_value,textarea_value):
+@app.route("/encodage", methods=["POST"])
+def my_route():
+    data = request.get_json()
+    dropdown_value = data["dropdownValue"]
+    textarea_value = data["textareaValue"]
     d = {'peche':'1.png','riviere':'2.png','hiver':'3.png','pro1':'4.png'}
     encode_text(textarea_value,'static/'+d[dropdown_value])
     return "Success"
@@ -30,7 +33,7 @@ def my_route2(dropdown_value):
     d = {'peche':'1.png','riviere':'2.png','hiver':'3.png','pro1':'4.png'}
     print("Function detected")
     decoded=decode_text('static/'+d[dropdown_value])
-    print(decoded)
+    #print(decoded)
     return decoded
 
 @app.route('/encode_image', methods=['POST'])

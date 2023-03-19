@@ -336,9 +336,26 @@ function Encodage() {
       }
       
     }
-    fetch("/encodage/" + dropdownValue + '/' + textareaValue);
-	//alert(`Texte stocké dans le serveur choisi avec succès!`)
+    fetch("/encodage", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            dropdownValue: dropdownValue,
+            textareaValue: textareaValue
+        })
+    }).then(response => {
+        if (response.ok) {
+            console.log(`Texte stocké dans le serveur choisi avec succès!`);
+        } else {
+            throw new Error(`Erreur ${response.status} lors de la requête: ${response.statusText}`);
+        }
+    }).catch(error => {
+        console.error("Erreur lors de la requête:", error);
+    });
 }
+
 
 function pic() {
       const form = document.querySelector('form');
