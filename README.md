@@ -6,7 +6,7 @@
 
 $a = $"numéro obtenu pour le caractère"
 
-$pixel(r,g,b,a)=(x+\frac{a}{3})(y)(z)$
+$pixel(r,g,b,a)=(r+\frac{a}{3},g,b)$
 
 # Notes
 
